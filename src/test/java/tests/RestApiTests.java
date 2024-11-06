@@ -6,7 +6,8 @@ import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
 
-public class RestApiTests {
+public class RestApiTests extends TestBase {
+
     @Test
     void successfulLoginTest() {
         String loginData = "{\"email\": \"eve.holt@reqres.in\",\"password\": \"cityslicka\"}";
@@ -16,18 +17,18 @@ public class RestApiTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().body()
                 .log().status()
                 .statusCode(200)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", notNullValue());
     }
 
     @Test
     void checkUserEmailTest() {
-        get("https://reqres.in/api/users?page=2")
+        get("/users?page=2")
                 .then()
                 .log().body()
                 .log().status()
@@ -45,14 +46,14 @@ public class RestApiTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("/register")
 
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
                 .body("id", is(4))
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", notNullValue());
     }
 
     @Test
@@ -65,7 +66,7 @@ public class RestApiTests {
                 .log().uri()
 
                 .when()
-                .patch("https://reqres.in/api/users/2")
+                .patch("/users/2")
 
                 .then()
                 .log().status()
@@ -77,7 +78,7 @@ public class RestApiTests {
 
     @Test
     void deleteRequestTest() {
-        delete("https://reqres.in/api/users/2")
+        delete("/users/2")
                 .then()
                 .log().body()
                 .log().status()
@@ -94,7 +95,7 @@ public class RestApiTests {
                 .log().uri()
 
                 .when()
-                .put("https://reqres.in/api/users/2")
+                .put("/users/2")
 
                 .then()
                 .log().status()

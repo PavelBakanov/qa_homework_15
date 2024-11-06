@@ -13,7 +13,6 @@ repositories {
 dependencies {
     testImplementation(
             'org.junit.jupiter:junit-jupiter:5.11.1',
-            'com.codeborne:selenide:7.0.0',
             'org.slf4j:slf4j-simple:2.0.16',
             'io.rest-assured:rest-assured:5.5.0'
     )
