@@ -1,39 +1,52 @@
 package tests;
 
+import models.LoginRequestModel;
+import models.LoginResponseModel;
+import models.UserListResponseModel;
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static specs.LoginSpec.loginRequestSpec;
+import static specs.LoginSpec.loginResponseSpec;
 
 public class RestApiTests extends TestBase {
 
     @Test
     void successfulLoginTest() {
-        String loginData = "{\"email\": \"eve.holt@reqres.in\",\"password\": \"cityslicka\"}";
-        given()
-                .body(loginData)
-                .contentType(JSON)
-                .log().uri()
+        LoginRequestModel loginData = new LoginRequestModel();
+        loginData.setEmail("eve.holt@reqres.in");
+        loginData.setPassword("cityslicka");
+        LoginResponseModel response = step("Сделать запрос", () ->
+                given(loginRequestSpec)
+                        .body(loginData)
 
-                .when()
-                .post("/login")
+                        .when()
+                        .post()
 
-                .then()
-                .log().body()
-                .log().status()
-                .statusCode(200)
-                .body("token", notNullValue());
+                        .then()
+                        .spec(loginResponseSpec)
+                        .extract().as(LoginResponseModel.class));
+
+        step("Проверить ответ", () -> assertNotNull(response.getToken()));
+
+
     }
 
     @Test
     void checkUserEmailTest() {
-        get("/users?page=2")
+        UserListResponseModel response = get("api/users?page=2")
                 .then()
                 .log().body()
                 .log().status()
                 .statusCode(200)
-                .body("data.email", hasItem("michael.lawson@reqres.in"));
+                .extract().as(UserListResponseModel.class);
+        assertEquals(response.getData().get(0).getEmail(), "michael.lawson@reqres.in");
     }
 
     @Test
