@@ -59,7 +59,7 @@ public class RestApiTests extends TestBase {
                 .log().uri()
 
                 .when()
-                .post("/register")
+                .post("api/register")
 
                 .then()
                 .log().status()
@@ -79,7 +79,7 @@ public class RestApiTests extends TestBase {
                 .log().uri()
 
                 .when()
-                .patch("/users/2")
+                .patch("api/users/2")
 
                 .then()
                 .log().status()
@@ -91,7 +91,7 @@ public class RestApiTests extends TestBase {
 
     @Test
     void deleteRequestTest() {
-        delete("/users/2")
+        delete("api/users/2")
                 .then()
                 .log().body()
                 .log().status()
@@ -108,7 +108,7 @@ public class RestApiTests extends TestBase {
                 .log().uri()
 
                 .when()
-                .put("/users/2")
+                .put("api/users/2")
 
                 .then()
                 .log().status()
