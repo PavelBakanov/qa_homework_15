@@ -22,7 +22,7 @@ public class ReqresSpecifications {
             .log(LogDetail.ALL)
             .build();
 
-    public static RequestSpecification normalRequestSpec = with()
+    public static RequestSpecification commonRequest = with()
             .filter(withCustomTemplates())
             .contentType(JSON)
             .log().all();

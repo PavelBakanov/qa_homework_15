@@ -19,7 +19,7 @@ public class RestApiTests extends TestBase {
         loginData.setEmail("eve.holt@reqres.in");
         loginData.setPassword("cityslicka");
         LoginResponseModel response = step("Сделать запрос логина", () ->
-                given(normalRequestSpec)
+                given(commonRequest)
                         .body(loginData)
 
                         .when()
@@ -56,7 +56,7 @@ public class RestApiTests extends TestBase {
 
 
         RegisterResponseModel response = step("Сделать запрос регистрации", () ->
-                given(normalRequestSpec)
+                given(commonRequest)
                         .body(request)
 
                         .when()
@@ -82,7 +82,7 @@ public class RestApiTests extends TestBase {
 
         PatchResponseModel response = step("Сделать запрос корректировки данных", () ->
 
-                given(normalRequestSpec)
+                given(commonRequest)
                         .body(request)
 
                         .when()
@@ -116,7 +116,7 @@ public class RestApiTests extends TestBase {
         request.setJob("zion resident");
 
         PutResponseModel response = step("Сделать запрос занесения новых данных", () ->
-                given(normalRequestSpec)
+                given(commonRequest)
                         .body(request)
 
                         .when()
