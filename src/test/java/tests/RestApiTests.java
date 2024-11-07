@@ -6,20 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
-import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static specs.DeleteUsersSpec.deleteResponseSpec;
-import static specs.LoginSpec.loginRequestSpec;
-import static specs.LoginSpec.loginResponseSpec;
-import static specs.PatchUsersSpec.patchUsersRequestSpec;
-import static specs.PatchUsersSpec.patchUsersResponseSpec;
-import static specs.PutUsersSpec.putUsersRequestSpec;
-import static specs.PutUsersSpec.putUsersResponseSpec;
-import static specs.RegisterSpec.registerRequestSpec;
-import static specs.RegisterSpec.registerResponseSpec;
-import static specs.CheckEmailSpec.usersResponseSpec;
+import static specs.ReqresSpecifications.*;
 
 public class RestApiTests extends TestBase {
 
@@ -30,14 +19,14 @@ public class RestApiTests extends TestBase {
         loginData.setEmail("eve.holt@reqres.in");
         loginData.setPassword("cityslicka");
         LoginResponseModel response = step("Сделать запрос логина", () ->
-                given(loginRequestSpec)
+                given(normalRequestSpec)
                         .body(loginData)
 
                         .when()
-                        .post()
+                        .post("/login")
 
                         .then()
-                        .spec(loginResponseSpec)
+                        .spec(response200)
                         .extract().as(LoginResponseModel.class));
 
         step("Проверить, что в ответе есть токен", () -> assertNotNull(response.getToken()));
@@ -49,9 +38,9 @@ public class RestApiTests extends TestBase {
     @DisplayName("Проверка определенного емэйла")
     void checkUserEmailTest() {
         UserListResponseModel response = step("Сделать запрос полного списка пользователей", () ->
-                get("api/users?page=2")
+                get("/users?page=2")
                         .then()
-                        .spec(usersResponseSpec)
+                        .spec(response200)
                         .extract().as(UserListResponseModel.class));
 
         step("Проверить, что в ответе у определенного пользователя емэйл соответсвует запрашиваему", () ->
@@ -67,14 +56,14 @@ public class RestApiTests extends TestBase {
 
 
         RegisterResponseModel response = step("Сделать запрос регистрации", () ->
-                given(registerRequestSpec)
+                given(normalRequestSpec)
                         .body(request)
 
                         .when()
-                        .post()
+                        .post("/register")
 
                         .then()
-                        .spec(registerResponseSpec)
+                        .spec(response200)
                         .extract().as(RegisterResponseModel.class));
 
         step("Проверить, что id и token не пустые", () -> {
@@ -93,14 +82,14 @@ public class RestApiTests extends TestBase {
 
         PatchResponseModel response = step("Сделать запрос корректировки данных", () ->
 
-                given(patchUsersRequestSpec)
+                given(normalRequestSpec)
                         .body(request)
 
                         .when()
-                        .patch()
+                        .patch("/users/2")
 
                         .then()
-                        .spec(patchUsersResponseSpec)
+                        .spec(response200)
                         .extract().as(PatchResponseModel.class));
 
         step("Проверить в ответе соответствие name и job", () -> {
@@ -114,9 +103,9 @@ public class RestApiTests extends TestBase {
     @DisplayName("Проверка удаления данных")
     void deleteRequestTest() {
         step("Удалить данные. В ответе будет код ошибки 204", () ->
-                delete("api/users/2")
+                delete("/users/2")
                         .then()
-                        .spec(deleteResponseSpec));
+                        .spec(response204));
     }
 
     @Test
@@ -127,14 +116,14 @@ public class RestApiTests extends TestBase {
         request.setJob("zion resident");
 
         PutResponseModel response = step("Сделать запрос занесения новых данных", () ->
-                given(putUsersRequestSpec)
+                given(normalRequestSpec)
                         .body(request)
 
                         .when()
-                        .put("api/users/2")
+                        .put("/users/2")
 
                         .then()
-                        .spec(putUsersResponseSpec)
+                        .spec(response200)
                         .extract().as(PutResponseModel.class));
 
         step("Проверить в ответе соответствие name и job", () -> {
