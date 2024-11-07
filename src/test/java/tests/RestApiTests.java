@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static specs.ReqresSpecifications.*;
-
+@DisplayName("Тесты сайта reqres.in через API с применением RestAssured, моделей и спецификаций")
 public class RestApiTests extends TestBase {
 
     @Test
@@ -30,8 +30,6 @@ public class RestApiTests extends TestBase {
                         .extract().as(LoginResponseModel.class));
 
         step("Проверить, что в ответе есть токен", () -> assertNotNull(response.getToken()));
-
-
     }
 
     @Test
@@ -54,7 +52,6 @@ public class RestApiTests extends TestBase {
         request.setEmail("eve.holt@reqres.in");
         request.setPassword("pistol");
 
-
         RegisterResponseModel response = step("Сделать запрос регистрации", () ->
                 given(commonRequest)
                         .body(request)
@@ -70,7 +67,6 @@ public class RestApiTests extends TestBase {
             assertNotNull(response.getId());
             assertNotNull(response.getToken());
         });
-
     }
 
     @Test
@@ -96,7 +92,6 @@ public class RestApiTests extends TestBase {
             assertEquals(response.getName(), "morpheus");
             assertEquals(response.getJob(), "zion resident");
         });
-
     }
 
     @Test
