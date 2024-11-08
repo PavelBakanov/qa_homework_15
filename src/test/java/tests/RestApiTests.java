@@ -1,6 +1,7 @@
 package tests;
 
 import models.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +10,12 @@ import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static specs.ReqresSpecifications.*;
+
 @DisplayName("Тесты сайта reqres.in через API с применением RestAssured, моделей и спецификаций")
 public class RestApiTests extends TestBase {
 
     @Test
-    @DisplayName("Проверка успешной входа в учетную запись")
+    @DisplayName("Проверка успешного входа в учетную запись")
     void successfulLoginTest() {
         LoginRequestModel loginData = new LoginRequestModel();
         loginData.setEmail("eve.holt@reqres.in");
@@ -29,14 +31,15 @@ public class RestApiTests extends TestBase {
                         .spec(response200)
                         .extract().as(LoginResponseModel.class));
 
-        step("Проверить, что в ответе есть токен", () -> assertNotNull(response.getToken()));
+        step("Проверить, что в ответе есть токен", () -> Assertions.assertThat(response.getToken()).isAlphanumeric());
     }
 
     @Test
     @DisplayName("Проверка определенного емэйла")
     void checkUserEmailTest() {
         UserListResponseModel response = step("Сделать запрос полного списка пользователей", () ->
-                get("/users?page=2")
+                given(commonRequest)
+                        .get("/users?page=2")
                         .then()
                         .spec(response200)
                         .extract().as(UserListResponseModel.class));
@@ -64,8 +67,8 @@ public class RestApiTests extends TestBase {
                         .extract().as(RegisterResponseModel.class));
 
         step("Проверить, что id и token не пустые", () -> {
-            assertNotNull(response.getId());
-            assertNotNull(response.getToken());
+            Assertions.assertThat(response.getId()).asInt();
+            Assertions.assertThat(response.getToken()).isAlphanumeric();
         });
     }
 
@@ -98,7 +101,8 @@ public class RestApiTests extends TestBase {
     @DisplayName("Проверка удаления данных")
     void deleteRequestTest() {
         step("Удалить данные. В ответе будет код ошибки 204", () ->
-                delete("/users/2")
+                given(commonRequest)
+                        .delete("/users/2")
                         .then()
                         .spec(response204));
     }
