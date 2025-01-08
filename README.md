@@ -4,7 +4,7 @@
 
 * <a href="#tests">Что делают тесты?</a>
 * <a href="#tools">Технологии</a>
-* a href="#launch">Запуск</a>
+* <a href="#launch">Запуск</a>
 * <a href="#allure">Отчет в Allure</a>
 * <a href="#telegramBot">Бот в Telegram</a>
 * <a href="#video">Видео прохождения тестов</a>
