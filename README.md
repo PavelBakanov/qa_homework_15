@@ -4,7 +4,7 @@
 
 * <a href="#tests">Что делают тесты?</a>
 * <a href="#tools">Технологии</a>
-* <a href="#jenkins">Jenkins</a>
+* a href="#launch">Запуск</a>
 * <a href="#allure">Отчет в Allure</a>
 * <a href="#telegramBot">Бот в Telegram</a>
 * <a href="#video">Видео прохождения тестов</a>
@@ -13,7 +13,7 @@
 <a id="tests"></a>
 ## <a name="Что делают тесты?">**Что делают тесты?**</a>
 
-Шесть тестов, тестирующие разные страницы данного сайта.
+Шесть тестов, тестирующие REST Api запросы данного сайта, и проверяющие ответы.
 
 ---
 <a id="tools"></a>
@@ -32,10 +32,13 @@
 </p>
 
 ---
-<a id="jenkins"></a>
-## <a name="Jenkins">**Jenkins**</a>
+<a id="launch"></a>
+## <a name="Запуск">**Запуск**</a>
 
-Тесты запускаются только через [Jenkins](https://jenkins.autotests.cloud/job/qa_diplom_api/)  
+Для запуска локально в терминале нужно прописать:
+ - ./gradlew clean requres_in -Denv=local
+
+Так же тесты можно запустить через [Jenkins](https://jenkins.autotests.cloud/job/qa_diplom_api/)  
 
 <img src="images/Jenkins.png" width="900">
 
