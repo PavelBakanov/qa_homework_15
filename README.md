@@ -36,7 +36,7 @@
 ## <a name="Запуск">**Запуск**</a>
 
 Для запуска локально в терминале нужно прописать:
- - ./gradlew clean requres_in -Denv=local
+ - ./gradlew clean reqres_in -Denv=local
 
 Так же тесты можно запустить через [Jenkins](https://jenkins.autotests.cloud/job/qa_diplom_api/)  
 
