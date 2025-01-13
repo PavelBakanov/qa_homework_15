@@ -1,11 +1,10 @@
 package models;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
-@RequiredArgsConstructor
-@NoArgsConstructor
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestModel {
-    @NonNull
     String email, password, name, job;
 }
