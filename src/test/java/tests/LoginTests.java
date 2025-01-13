@@ -18,9 +18,9 @@ public class LoginTests extends TestBase {
     @Owner("bakanovpb")
     @DisplayName("Проверка успешного входа в учетную запись")
     void successfulLoginTest() {
-        RequestModel loginData = new RequestModel();
-        loginData.setEmail("eve.holt@reqres.in");
-        loginData.setPassword("cityslicka");
+        RequestModel loginData = RequestModel.builder()
+                .email("eve.holt@reqres.in")
+                .password("cityslicka").build();
 
         LoginResponseModel response = loginApi.doLoginPostRequest(loginData);
 
