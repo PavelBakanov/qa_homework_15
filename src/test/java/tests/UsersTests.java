@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Owner("bakanovpb")
 @Tag("reqres.in")
 @DisplayName("Тесты с базой пользователей")
 public class UsersTests extends TestBase {
@@ -14,7 +15,6 @@ public class UsersTests extends TestBase {
     UsersApi usersApi = new UsersApi();
 
     @Test
-    @Owner("bakanovpb")
     @DisplayName("Проверка определенного емэйла")
     void checkUserEmailTest() {
         UserListResponseModel response = usersApi.getUserList();
@@ -23,7 +23,6 @@ public class UsersTests extends TestBase {
     }
 
     @Test
-    @Owner("bakanovpb")
     @DisplayName("Проверка корректировки данных")
     void patchRequestTest() {
         RequestModel request = new RequestModel();
@@ -36,14 +35,12 @@ public class UsersTests extends TestBase {
     }
 
     @Test
-    @Owner("bakanovpb")
     @DisplayName("Проверка удаления данных")
     void deleteRequestTest() {
         usersApi.deleteData();
     }
 
     @Test
-    @Owner("bakanovpb")
     @DisplayName("Проверка занесения новых данных")
     void putRequestTest() {
         RequestModel request = new RequestModel();

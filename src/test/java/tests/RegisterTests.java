@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Owner("bakanovpb")
 @Tag("reqres.in")
 @DisplayName("Тесты на регистрацию")
 public class RegisterTests extends TestBase{
@@ -15,7 +16,6 @@ public class RegisterTests extends TestBase{
     RegisterApi registerApi = new RegisterApi();
 
     @Test
-    @Owner("bakanovpb")
     @DisplayName("Проверка успешной регистрации")
     void successfulRegistrationTest() {
         RequestModel request = new RequestModel();
