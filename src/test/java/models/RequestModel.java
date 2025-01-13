@@ -1,10 +1,11 @@
 package models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Data
 public class RequestModel {
-    final String email, password, name, job;
+    String email, password, name, job;
 }
