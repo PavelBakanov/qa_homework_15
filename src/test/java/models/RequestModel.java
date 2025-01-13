@@ -6,5 +6,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 public class RequestModel {
-    String email, password, name, job;
+    final String email, password, name, job;
 }
