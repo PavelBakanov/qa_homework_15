@@ -12,7 +12,8 @@ public class UsersApi {
     public UserListResponseModel getUserList() {
         UserListResponseModel response = step("Сделать запрос полного списка пользователей", () ->
                 given(commonRequest)
-                        .get("/users?page=2")
+                        .queryParam("page","2")
+                        .get("/users")
                         .then()
                         .spec(response200)
                         .extract().as(UserListResponseModel.class));
@@ -38,7 +39,7 @@ public class UsersApi {
         });
     }
 
-    public PatchResponseModel patchUserData(PatchRequestModel request) {
+    public PatchResponseModel patchUserData(RequestModel request) {
         PatchResponseModel response = step("Сделать запрос корректировки данных", () ->
 
                 given(commonRequest)
@@ -62,7 +63,7 @@ public class UsersApi {
                         .spec(response204));
     }
 
-    public PutResponseModel putNewData(PutRequestModel request) {
+    public PutResponseModel putNewData(RequestModel request) {
         PutResponseModel response = step("Сделать запрос занесения новых данных", () ->
                 given(commonRequest)
                         .body(request)

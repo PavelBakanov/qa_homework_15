@@ -26,7 +26,7 @@ public class UsersTests extends TestBase {
     @Owner("bakanovpb")
     @DisplayName("Проверка корректировки данных")
     void patchRequestTest() {
-        PatchRequestModel request = new PatchRequestModel();
+        RequestModel request = new RequestModel();
         request.setName("morpheus");
         request.setJob("zion resident");
 
@@ -46,7 +46,7 @@ public class UsersTests extends TestBase {
     @Owner("bakanovpb")
     @DisplayName("Проверка занесения новых данных")
     void putRequestTest() {
-        PutRequestModel request = new PutRequestModel();
+        RequestModel request = new RequestModel();
         request.setName("morpheus");
         request.setJob("zion resident");
 

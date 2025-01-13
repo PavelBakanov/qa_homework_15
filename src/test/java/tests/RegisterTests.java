@@ -2,8 +2,8 @@ package tests;
 
 import api.RegisterApi;
 import io.qameta.allure.Owner;
-import models.RegisterRequestModel;
 import models.RegisterResponseModel;
+import models.RequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ public class RegisterTests extends TestBase{
     @Owner("bakanovpb")
     @DisplayName("Проверка успешной регистрации")
     void successfulRegistrationTest() {
-        RegisterRequestModel request = new RegisterRequestModel();
+        RequestModel request = new RequestModel();
         request.setEmail("eve.holt@reqres.in");
         request.setPassword("pistol");
 

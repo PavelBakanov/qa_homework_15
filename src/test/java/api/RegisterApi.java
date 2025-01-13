@@ -1,7 +1,7 @@
 package api;
 
-import models.RegisterRequestModel;
 import models.RegisterResponseModel;
+import models.RequestModel;
 import org.assertj.core.api.Assertions;
 
 import static io.qameta.allure.Allure.step;
@@ -10,7 +10,7 @@ import static specs.ReqresSpecifications.commonRequest;
 import static specs.ReqresSpecifications.response200;
 
 public class RegisterApi {
-    public RegisterResponseModel doRegisterPostRequest (RegisterRequestModel request)
+    public RegisterResponseModel doRegisterPostRequest (RequestModel request)
     {
         RegisterResponseModel response = step("Сделать запрос регистрации", () ->
                 given(commonRequest)

@@ -1,6 +1,6 @@
 package api;
 
-import models.LoginRequestModel;
+import models.RequestModel;
 import models.LoginResponseModel;
 import org.assertj.core.api.Assertions;
 
@@ -11,7 +11,7 @@ import static specs.ReqresSpecifications.response200;
 
 public class LoginApi {
 
-    public LoginResponseModel doLoginPostRequest(LoginRequestModel loginData) {
+    public LoginResponseModel doLoginPostRequest(RequestModel loginData) {
         LoginResponseModel response = step("Сделать запрос логина", () ->
                 given(commonRequest)
                         .body(loginData)
