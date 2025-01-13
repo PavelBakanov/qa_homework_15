@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 @Tag("reqres.in")
 @DisplayName("Тесты на регистрацию")
-public class RegisterTests extends TestBase {
+public class RegisterTests extends TestBase{
 
     RegisterApi registerApi = new RegisterApi();
 
@@ -18,9 +18,9 @@ public class RegisterTests extends TestBase {
     @Owner("bakanovpb")
     @DisplayName("Проверка успешной регистрации")
     void successfulRegistrationTest() {
-        RequestModel request = RequestModel.builder()
-                .email("eve.holt@reqres.in")
-                .password("pistol").build();
+        RequestModel request = new RequestModel();
+        request.setEmail("eve.holt@reqres.in");
+        request.setPassword("pistol");
 
         RegisterResponseModel response = registerApi.doRegisterPostRequest(request);
 

@@ -1,13 +1,11 @@
 package models;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@Builder
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Data
 public class RequestModel {
+    @NonNull
     String email, password, name, job;
 }

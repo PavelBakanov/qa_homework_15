@@ -26,9 +26,9 @@ public class UsersTests extends TestBase {
     @Owner("bakanovpb")
     @DisplayName("Проверка корректировки данных")
     void patchRequestTest() {
-        RequestModel request = RequestModel.builder()
-                .name("morpheus")
-                .job("zion resident").build();
+        RequestModel request = new RequestModel();
+        request.setName("morpheus");
+        request.setJob("zion resident");
 
         PatchResponseModel response = usersApi.patchUserData(request);
 
@@ -46,9 +46,9 @@ public class UsersTests extends TestBase {
     @Owner("bakanovpb")
     @DisplayName("Проверка занесения новых данных")
     void putRequestTest() {
-        RequestModel request = RequestModel.builder()
-                .name("morpheus")
-                .job("zion resident").build();
+        RequestModel request = new RequestModel();
+        request.setName("morpheus");
+        request.setJob("zion resident");
 
         PutResponseModel response = usersApi.putNewData(request);
 
